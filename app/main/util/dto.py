@@ -18,3 +18,11 @@ class AuthDto:
         'email': fields.String(required=True, description='The email address'),
         'password': fields.String(required=True, description='The user password '),
     })
+
+class InvitationDto:
+    api = Namespace('invitation', description='invitation related operations')
+    invitation_dto = api.model('invitation',{
+        'invitation_id': fields.String(description='invitation Identifier',required=True),
+        "from_id": fields.String(description='Inviter Identifier',required=True),
+        "to_id": fields.String(description='Invitee Identifier',required=True)
+    })
