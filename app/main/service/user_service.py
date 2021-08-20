@@ -3,7 +3,7 @@ import datetime
 
 from app.main import db
 from app.main.model.user import User
-
+from app.main.model.friends_list import FriendsList
 
 def save_new_user(data):
     user = User.query.filter_by(email=data['email']).first()
@@ -17,7 +17,15 @@ def save_new_user(data):
             surname=data['surname'],
             registered_on=datetime.datetime.utcnow()
         )
+        friends_list = FriendsList(
+            public_id=new_user.public_id,
+            friends_list=
+            """{"list":[]}""",
+            friends_count=0
+        )
+
         save_changes(new_user)
+        save_changes(friends_list)
         return generate_token(new_user)
 
     else:

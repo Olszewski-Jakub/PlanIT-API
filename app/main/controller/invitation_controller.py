@@ -1,19 +1,21 @@
 from flask import request
 from flask_restplus import Resource
+from flask_restplus.marshalling import marshal_with_field
 
 from ..util.dto import InvitationDto
 from ..service.invitation_service import save_new_invitation,\
-     get_all_invitations, get_invitation_by_id, get_all_invitation_for_user
+     get_all_invitations, get_invitation_by_id, get_all_invitation_for_user,\
+         accept_invitation, decline_invitation
 
 api = InvitationDto.api
-_invitation = InvitationDto.invitation_dto
+_invitation = InvitationDto.invitation
     
 @api.route('/')
 class InvitationList(Resource):
     @api.doc('list_of_send_invitations')
-    @api.marshal_list_with(_invitation,envelope='data')
+    @api.marshal_list_with(_invitation, envelope='data')
     def get(self):
-        return get_all_invitations
+        return get_all_invitations()
 
 
 @api.route('/send/<invitation_id>')
@@ -29,7 +31,8 @@ class Invitation(Resource):
             api.abort(404)
         else:
             return invitation
-    
+
+    @api.expect(_invitation, validate=True)
     def post(self,invitation_id):
         return save_new_invitation(invitation_id)
 
@@ -39,7 +42,7 @@ class Invitation(Resource):
 @api.response(404, "User not found")
 class InvitedUserInvitation(Resource):
     @api.doc('get all invitation for the specified user')
-    @api.marshal_with(_invitation, envelope='data')
+    @api.marshal_list_with(_invitation, envelope='data')
     def get(self,public_id):
         """get all invitation for invited user public_id"""
         return get_all_invitation_for_user(public_id,"to_id")
@@ -50,7 +53,7 @@ class InvitedUserInvitation(Resource):
 @api.response(404, "User not found")
 class SendUserInvitation(Resource):
     @api.doc('get all invitation for the specified user')
-    #@api.marshal_with(_invitation)
+    @api.marshal_list_with(_invitation, envelope='data')
     def get(self,public_id):
         """get all invitation for send user public_id"""
         return get_all_invitation_for_user(public_id,"from_id")
@@ -60,6 +63,12 @@ class SendUserInvitation(Resource):
 @api.response(404,'Invitation not found')
 class AcceptInvitation(Resource):
     @api.doc('accept an invitation')
-    @api.marshal_with(_invitation)
-    def get(self,invitation_id):
-        return invitation_id
+    def patch(self,invitation_id):
+        return accept_invitation(invitation_id)
+
+@api.route('/decline/<invitation_id>')
+@api.param('invitation_id', 'The invitation identifier')
+class DeclineInvitation(Resource):
+    @api.doc('decline an invitation')
+    def delete(self, invitation_id):
+        return decline_invitation(invitation_id)

@@ -21,8 +21,16 @@ class AuthDto:
 
 class InvitationDto:
     api = Namespace('invitation', description='invitation related operations')
-    invitation_dto = api.model('invitation',{
-        'invitation_id': fields.String(description='invitation Identifier',required=True),
-        "from_id": fields.String(description='Inviter Identifier',required=True),
-        "to_id": fields.String(description='Invitee Identifier',required=True)
+    invitation = api.model('invitation',{
+        'invitation_id': fields.String(description='invitation Identifier'),
+        "from_id": fields.String(description='Inviter Identifier'),
+        "to_id": fields.String(description='Invitee Identifier')
+    })
+
+class FriendsListDto:
+    api = Namespace('friends', description='friends list related operations')
+    friends = api.model('friends', {
+        'public_id': fields.String(description='user Identifier'),
+        'friends_list': fields.String(description='Friends list of specified user'),
+        'friends_count': fields.String(description="Number of friends of specified user")
     })

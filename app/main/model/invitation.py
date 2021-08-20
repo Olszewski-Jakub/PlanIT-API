@@ -13,6 +13,8 @@ class Invitation(db.Model):
     invited_on = db.Column(db.DateTime)
     from_id = db.Column(db.String(100))
     to_id = db.Column(db.String(100))
+    is_reviewed = db.Column(db.Boolean, default=False)
+    status = db.Column(db.String(10), default="Pending")
         
     def __init__(self,to_id):
         user, status = Auth.get_logged_in_user(request)

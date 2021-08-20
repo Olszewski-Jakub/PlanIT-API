@@ -18,7 +18,7 @@ class TestDevelopmentConfig(TestCase):
         self.assertTrue(app.config['DEBUG'] == True)
         self.assertFalse(current_app == None)
         self.assertTrue(
-            app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///' + os.path.join(basedir, 'Plan_It_main.db')
+            app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///' + os.path.join(basedir, 'Plan_It_test.db')
         )
 
 
@@ -31,7 +31,7 @@ class TestTestingConfig(TestCase):
         self.assertFalse(app.config['SECRET_KEY'] == 'my_precious')
         self.assertTrue(app.config['DEBUG'])
         self.assertTrue(
-            app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///' + os.path.join(basedir, 'Plan_It_main.db')
+            app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///' + os.path.join(basedir, 'Plan_It_test.db')
         )
 
 
