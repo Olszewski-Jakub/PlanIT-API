@@ -34,3 +34,26 @@ class FriendsListDto:
         'friends_list': fields.String(description='Friends list of specified user'),
         'friends_count': fields.String(description="Number of friends of specified user")
     })
+
+class EventDto:
+    api = Namespace('event', description='Event related operations')
+    event = api.model('event', {
+        'event_id': fields.String(description='event identifier'),
+        'creator' : fields.String(description='event creator'),
+        'name' : fields.String(description='name of an event'),
+        'description' : fields.String(description='description of an event'),
+        'lat_long' : fields.String(description='lat_long of an event'),
+        'date_of_event' : fields.String(description='date when event takes place'),
+        'invitations' : fields.String(description='invitation send for users'),
+        'participants' : fields.String(description='user takieng part in an event'),
+        'product_list' : fields.String(description='product list identifier'),
+    })
+
+
+class EventInvitationDto:
+    api = Namespace('event', description="Event Invitation realted operations")
+    event_invitation = api.model('event invitation', {
+        'event_invitation_id': fields.String(description='event invitation Identifier'),
+        "event_id": fields.String(description='Event Identifier'),
+        "to_id": fields.String(description='Invitee Identifier')
+    })

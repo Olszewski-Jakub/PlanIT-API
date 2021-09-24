@@ -1,12 +1,13 @@
-from sqlalchemy.orm import query
-from app.main.model.invitation import Invitation
-from app.main.model.friends_list import FriendsList
-import uuid
-from app.main import db
-from flask import request, jsonify
-from sqlalchemy import and_
-from app.main.controller.auth_controller import Auth
 import json
+import uuid
+
+from app.main import db
+from app.main.controller.auth_controller import Auth
+from app.main.model.friends_list import FriendsList
+from app.main.model.invitation import Invitation
+from flask import jsonify, request
+from sqlalchemy import and_
+from sqlalchemy.orm import query
 
 
 def save_new_invitation(to_id):
@@ -52,7 +53,7 @@ def get_all_invitation_for_user(public_id,type):
         }
     
     return response_object
-#FIXME #9 Create proetction that on;y receiver of invitation can accept it
+
 def accept_invitation(invitation_id):
     invitation = Invitation.query.filter_by(invitation_id=invitation_id).first()
     user,service = Auth.get_logged_in_user(request)

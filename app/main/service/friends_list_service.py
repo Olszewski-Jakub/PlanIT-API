@@ -44,3 +44,5 @@ def get_all_friends_details(public_id):
     friends_dict = json.loads(json_str)
     arr= friends_dict['list']
     return User.query.filter(User.public_id.in_(arr)).all()
+
+    

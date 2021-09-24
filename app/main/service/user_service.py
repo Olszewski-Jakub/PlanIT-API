@@ -5,6 +5,7 @@ from app.main import db
 from app.main.model.user import User
 from app.main.model.friends_list import FriendsList
 
+
 def save_new_user(data):
     user = User.query.filter_by(email=data['email']).first()
     if not user:
@@ -63,4 +64,12 @@ def generate_token(user):
 def save_changes(data):
     db.session.add(data)
     db.session.commit()
+
+
+#TODO #26 Create user search
+def user_search(text):
+    arr =  User.query.filter(User.email == text ).all()
+    arr = list(map(lambda x : x.public_id, arr))
+    print(arr)
+    return arr
 

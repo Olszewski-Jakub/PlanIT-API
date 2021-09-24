@@ -2,7 +2,7 @@ from flask import request
 from flask_restplus import Resource
 
 from ..util.dto import UserDto
-from ..service.user_service import save_new_user, get_all_users, get_a_user
+from ..service.user_service import save_new_user, get_all_users, get_a_user, user_search
 
 api = UserDto.api
 _user = UserDto.user
@@ -38,3 +38,12 @@ class User(Resource):
             api.abort(404)
         else:
             return user
+
+@api.route('search/<text>')
+@api.param('text', 'Value use to search for')
+@api.response(404, 'User not found')
+class Search(Resource):
+    @api.marshal_list_with(_user)
+    @api.doc('Search for an user')
+    def get(self, text):
+        return user_search(text)
