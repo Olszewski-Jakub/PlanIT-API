@@ -46,13 +46,13 @@ class EventDto:
         'date_of_event' : fields.String(description='date when event takes place'),
         'invitations' : fields.String(description='invitation send for users'),
         'participants' : fields.String(description='user takieng part in an event'),
-        'product_list' : fields.String(description='product list identifier'),
+        'product_list' : fields.String(description='product list identifier')
     })
 
 
 class EventInvitationDto:
-    api = Namespace('event', description="Event Invitation realted operations")
-    event_invitation = api.model('event invitation', {
+    api = Namespace('event_invitation', description="Event Invitation realted operations")
+    event_invitation = api.model('event_invitation', {
         'event_invitation_id': fields.String(description='event invitation Identifier'),
         "event_id": fields.String(description='Event Identifier'),
         "to_id": fields.String(description='Invitee Identifier')

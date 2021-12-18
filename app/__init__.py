@@ -1,5 +1,5 @@
 # app/__init__.py
-
+from flask import Flask
 from flask_restplus import Api
 from flask import Blueprint
 

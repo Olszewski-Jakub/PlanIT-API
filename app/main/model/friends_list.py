@@ -8,9 +8,9 @@ class FriendsList(db.Model):
 
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     public_id = db.Column(db.String(100), unique=True)
-    friends_list = db.Column(db.String(100))
+    friends_list = db.Column(db.String)
     friends_count = db.Column(db.Integer)
-
+    
     def __init__(self, public_id, friends_list, friends_count):
         self.public_id = public_id
         self.friends_list = friends_list

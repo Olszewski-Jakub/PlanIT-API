@@ -1,7 +1,7 @@
 alembic==0.9.8
 aniso8601==3.0.0
 bcrypt==3.1.4
-cffi==1.11.5
+cffi
 click==6.7
 Flask==2.0.1
 Flask-Bcrypt==0.7.1
@@ -14,7 +14,7 @@ itsdangerous==0.24
 Jinja2==2.11.3
 jsonschema==2.6.0
 Mako==1.0.7
-MarkupSafe==1.0
+MarkupSafe
 pycparser==2.18
 PyJWT==1.6.0
 python-dateutil==2.7.0

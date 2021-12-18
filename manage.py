@@ -6,7 +6,7 @@ from flask_script import Manager
 
 from app.main import create_app, db
 
-from app.main.model import user, blacklist, invitation, friends_list
+from app.main.model import user, blacklist, invitation, friends_list, event_invitation, event_invitation
 
 from app import blueprint
 

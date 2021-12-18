@@ -32,7 +32,7 @@ def delete_friend(public_id):
             'status': 'Succes',
             'message': 'Deleted user from firends list',
         }
-    return response_object
+    return response_object  
 
 def get_all_friends(public_id):
     return FriendsList.query.filter_by(public_id=public_id).first()
